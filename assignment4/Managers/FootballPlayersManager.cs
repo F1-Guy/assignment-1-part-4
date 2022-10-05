@@ -1,5 +1,4 @@
 ﻿using assignment1;
-using Microsoft.AspNetCore.Mvc;
 
 namespace assignment4.Managers
 {
@@ -52,7 +51,7 @@ namespace assignment4.Managers
         {
             // Get by can throw ArgumentException
             var player = GetById(id);
-         
+
             // Validator functions can throw ArgumentOutOfRangeException
             // as per the implementation in the assignment 1 dependency
             // the comment is here because of bad documentation 🙃 

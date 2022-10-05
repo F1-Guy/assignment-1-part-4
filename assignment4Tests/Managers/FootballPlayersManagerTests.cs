@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using assignment1;
+﻿using assignment1;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace assignment4.Managers.Tests
 {
@@ -41,7 +41,7 @@ namespace assignment4.Managers.Tests
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => manager.Add(testPlayer));
         }
-            
+
         [TestMethod()]
         public void AddEdgeDataTest()
         {
