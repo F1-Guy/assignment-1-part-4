@@ -2,37 +2,37 @@
 
 namespace assignment4.Controllers
 {
-    [Route("api/Players")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class FootbaPlayersControler : ControllerBase
+    public class FootballPlayersController : ControllerBase
     {
-        // GET: api/<Players>
+        // GET: api/<FootballPlayersController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<Players>/5
+        // GET api/<FootballPlayersController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<Players>
+        // POST api/<FootballPlayersController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<Players>/5
+        // PUT api/<FootballPlayersController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<Players>/5
+        // DELETE api/<FootballPlayersController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
