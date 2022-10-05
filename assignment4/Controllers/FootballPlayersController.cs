@@ -1,41 +1,60 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using assignment1;
+using assignment4.Managers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace assignment4.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/players")]
     [ApiController]
     public class FootballPlayersController : ControllerBase
     {
-        // GET: api/<FootballPlayersController>
+        private readonly FootballPlayersManager _manager = new();
+
+        // GET: api/<players>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<IEnumerable<FootballPlayer>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_manager.GetAll());
         }
 
-        // GET api/<FootballPlayersController>/5
+        // GET api/<players>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<FootballPlayer> Get(int id)
         {
-            return "value";
+            return Ok(_manager.GetById(id));
         }
 
-        // POST api/<FootballPlayersController>
+        // POST api/<players>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public ActionResult<FootballPlayer> Post([FromBody] FootballPlayer value)
         {
+            var player = _manager.Add(value);
+            return Created($"api/players/{player.Id}", player);
         }
 
-        // PUT api/<FootballPlayersController>/5
+        // PUT api/<players>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<FootballPlayer> Put(int id, [FromBody] FootballPlayer value)
         {
+            return Ok(_manager.Update(id, value));
         }
 
-        // DELETE api/<FootballPlayersController>/5
+        // DELETE api/<players>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<FootballPlayer> Delete(int id)
         {
+            return Ok(_manager.Delete(id));
         }
     }
 }
