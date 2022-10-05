@@ -17,18 +17,29 @@ namespace assignment4.Managers
 
         internal IEnumerable<FootballPlayer> GetAll()
         {
+            if (players.Count <= 0 || players == null)
+                return Enumerable.Empty<FootballPlayer>();
+
             return new List<FootballPlayer>(players);
         }
 
         internal FootballPlayer GetById(int id)
         {
-            return players.Find(player => player.Id == id);
+            var player = players.Find(player => player.Id == id);
+
+            if (player == null)
+                throw new ArgumentException("Player with that ID doesn't exist.");
+
+            return player;
         }
 
         internal FootballPlayer Add(FootballPlayer player)
         {
             player.Id = _nexId++;
 
+            // Validator functions can throw ArgumentOutOfRangeException
+            // as per the implementation in the assignment 1 dependency
+            // the comment is here because of bad documentation 🙃 
             player.ValidateName();
             player.ValidateAge();
             player.ValidateNo();
@@ -39,8 +50,12 @@ namespace assignment4.Managers
 
         internal FootballPlayer Update(int id, FootballPlayer value)
         {
+            // Get by can throw ArgumentException
             var player = GetById(id);
-
+         
+            // Validator functions can throw ArgumentOutOfRangeException
+            // as per the implementation in the assignment 1 dependency
+            // the comment is here because of bad documentation 🙃 
             value.ValidateName();
             value.ValidateAge();
             value.ValidateNo();
