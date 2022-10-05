@@ -18,7 +18,7 @@ namespace assignment4.Controllers
         {
             var players = _manager.GetAll();
 
-            if (players.Count() > 0)
+            if (players.Any())
                 return Ok(players);
 
             return NoContent();

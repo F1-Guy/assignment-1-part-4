@@ -15,7 +15,7 @@ namespace assignment4.Managers
             new FootballPlayer{Id = _nexId++, Name = "Kramaric", Age = 31, ShirtNumber = 27},
         };
 
-        internal IEnumerable<FootballPlayer> GetAll()
+        public IEnumerable<FootballPlayer> GetAll()
         {
             if (players.Count <= 0 || players == null)
                 return Enumerable.Empty<FootballPlayer>();
@@ -23,7 +23,7 @@ namespace assignment4.Managers
             return new List<FootballPlayer>(players);
         }
 
-        internal FootballPlayer GetById(int id)
+        public FootballPlayer GetById(int id)
         {
             var player = players.Find(player => player.Id == id);
 
@@ -33,7 +33,7 @@ namespace assignment4.Managers
             return player;
         }
 
-        internal FootballPlayer Add(FootballPlayer player)
+        public FootballPlayer Add(FootballPlayer player)
         {
             player.Id = _nexId++;
 
@@ -48,7 +48,7 @@ namespace assignment4.Managers
             return player;
         }
 
-        internal FootballPlayer Update(int id, FootballPlayer value)
+        public FootballPlayer Update(int id, FootballPlayer value)
         {
             // Get by can throw ArgumentException
             var player = GetById(id);
@@ -65,7 +65,7 @@ namespace assignment4.Managers
             return player;
         }
 
-        internal FootballPlayer Delete(int id)
+        public FootballPlayer Delete(int id)
         {
             var player = GetById(id);
 
